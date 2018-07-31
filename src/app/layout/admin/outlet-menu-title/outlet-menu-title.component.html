@@ -1,0 +1,135 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Outlet Menu Title'" [icon]="'fa-edit'"></app-page-header>
+
+    <div class="card mb-12">
+        <div class="card-header">Striped Rows</div>
+        <div class="card-body table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            Outlet
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Menu Category
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let outletMenuTitle of outletMenuTitles'>
+                        <td>
+                            {{outletMenuTitle.outlet}}
+                        </td>
+                        <td>
+                            {{outletMenuTitle.menuTitle}}
+                        </td>
+                        <td>
+                            {{outletMenuTitle.menuCategory}}
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+    <form role="form" #menuTitleForm="ngForm" (ngSubmit)="onSubmit(menuTitleForm)">
+        <div class="form-content">
+            <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Outlet</label>
+                        <select #outlet="ngModel" [(ngModel)]="outletMenuTitle.outletID" name="outletID" id="outletID" class="form-control" required>
+                            <option value="undefined">Select Outlet...</option>
+                            <option *ngFor='let outlet of outlets' [value]="outlet.id">{{ outlet.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Menu Category</label>
+                        <select #menuCategory="ngModel" [(ngModel)]="outletMenuTitle.menuCategoryID" name="menuCategoryID" id="menuCategoryID" class="form-control"
+                            required>
+                            <option value="undefined">Select the Menu Category...</option>
+                            <option *ngFor='let menuCategory of menuCategories' [value]="menuCategory.id">{{ menuCategory.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Food Item Size</label>
+                        <select #menuTitle="ngModel" [(ngModel)]="outletMenuTitle.foodItemSizeID" name="foodItemSizeID" id="foodItemSizeID" class="form-control"
+                            required>
+                            <option value="undefined">Select the Food Item Size...</option>
+                            <option *ngFor='let itemSize of itemSizes' [value]="itemSize.id">{{ itemSize.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="form-row">
+                <div class="form-group col-lg-6">
+                    <label>Menu Name</label>
+                    <div class="col-xs-10">
+                        <input #menuName="ngModel" [(ngModel)]="outletMenuTitle.outletMenuName" name="outletMenuName" id="outletMenuName" class="form-control"
+                            required>
+                        <div class="alert alert-danger" *ngIf="menuName.touched && menuName.invalid">
+                            Menu Name is required!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Menu Title</label>
+                        <select #menuTitle="ngModel" [(ngModel)]="outletMenuTitle.menuTitleID" name="menuTitleID" id="menuTitleID" class="form-control"
+                            required>
+                            <option value="undefined">Select the Menu...</option>
+                            <option *ngFor='let menuTitle of menuTitles' [value]="menuTitle.menuTitleID">{{ menuTitle.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-lg-6">
+                    <label>Menu Description</label>
+                    <div class="col-xs-10">
+                        <input #menuDescription="ngModel" [(ngModel)]="outletMenuTitle.outletMenuDescription" name="outletMenuDescription" id="outletMenuDescription"
+                            class="form-control" required>
+                        <div class="alert alert-danger" *ngIf="menuDescription.touched && menuDescription.invalid">
+                            Menu Description is required!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-lg-6">
+                    <label for="imageUrl">Image URL</label>
+                    <input #imageUrl="ngModel" [(ngModel)]="outletMenuTitle.imageUrl" name="imageUrl" id="imageUrl" type="text" class="form-control"
+                        required url>
+                    <div class="alert alert-danger" *ngIf="imageUrl.touched && imageUrl.invalid">
+                        <div *ngIf="imageUrl.errors.required">Image URL is required!</div>
+                        <div *ngIf="imageUrl.errors.url">URL is invalid!</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <button [disabled]="!menuTitleForm.valid" type="submit" class="btn btn-outline-primary form-group col-md-3">Save</button>
+    </form>
+</div>

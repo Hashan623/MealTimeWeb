@@ -1,0 +1,51 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Outlet Menu Food Item'" [icon]="'fa-edit'"></app-page-header>
+
+    <form role="form" #outletMenuFoodItemForm="ngForm" (ngSubmit)="onSubmit(outletMenuFoodItemForm)">
+        <div class="form-content">
+
+            <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Outlet</label>
+                        <select #outlet="ngModel" [(ngModel)]="outletMenuFoodItem.outlet" name="outlet" id="outlet" class="form-control" required>
+                            <option value="undefined">Select Outlet...</option>
+                            <option *ngFor='let outlet of outlets' [value]="outlet.id">{{ outlet.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Menu</label>
+                        <select #menuTitle="ngModel" [(ngModel)]="outletMenuFoodItem.menuTitle" name="menuTitle" id="menuTitle" class="form-control"
+                            required>
+                            <option value="undefined">Select the Menu Title...</option>
+                            <option *ngFor='let menuTitle of menuTitles' [value]="menuTitle.menuTitleID">{{ menuTitle.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Food Items</label>
+                        <ng-select [items]="foodItems" [multiple]="true" bindLabel="name" groupBy="gender" [selectableGroup]="true" [closeOnSelect]="false"
+                            bindValue="id" [(ngModel)]="outletMenuFoodItem.foodItems" name="foodItems">
+                            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                <input id="item-{{index}}" type="checkbox" [ngModel]="outletMenuFoodItem.foodItems" name="foodItems" /> {{item.name}}
+                            </ng-template>
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+        </div>
+        <button [disabled]="!outletMenuFoodItemForm.valid" type="submit" class="btn btn-outline-primary form-group col-md-3">Save</button>
+    </form>
+</div>

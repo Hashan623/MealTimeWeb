@@ -1,0 +1,137 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Outlet Food Item'" [icon]="'fa-edit'"></app-page-header>
+
+    <form role="form" #outletFoodItemForm="ngForm" (ngSubmit)="onSubmit(outletFoodItemForm)">
+        <div class="form-content">
+
+            <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Outlet</label>
+                        <select #outlet="ngModel" [(ngModel)]="outletFoodItem.outletID" name="outletID" id="outlet" class="form-control" required>
+                            <option value="undefined">Select Outlet...</option>
+                            <option *ngFor='let outlet of outlets' [value]="outlet.id">{{ outlet.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Food Item Category</label>
+                        <select (change)="onChange($event.target.value)" #foodItemCategory="ngModel" [(ngModel)]="outletFoodItem.foodItemCategoryID" name="foodItemCategoryID" id="foodItemCategory"
+                            class="form-control" required>
+                            <option value="undefined">Select Food Item Category...</option>
+                            <option *ngFor='let foodItemCategory of foodItemCategories' [value]="foodItemCategory.id">{{ foodItemCategory.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Menu Title</label>
+                        <select #menuTitle="ngModel" [(ngModel)]="outletFoodItem.menuTitle" name="menuTitleID" id="menuTitleID" class="form-control"
+                            required>
+                            <option value="undefined">Select Menu Title...</option>
+                            <option *ngFor='let menuTitle of menuTitles' [value]="menuTitle.id">{{ menuTitle.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Food Item</label>
+                        <select #foodItem="ngModel" [(ngModel)]="outletFoodItem.foodItemID" name="foodItemID" id="foodItem" class="form-control"
+                            required>
+                            <option value="undefined">Select the Food Item...</option>
+                            <option *ngFor='let foodItem of foodItems' [value]="foodItem.id">{{ foodItem.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-lg-6">
+                    <label>Food Item Name</label>
+                    <div class="col-xs-10">
+                        <input #fooditemName="ngModel" [(ngModel)]="outletFoodItem.name" name="name" id="outletFoodItemName" class="form-control"
+                            required>
+                        <div class="alert alert-danger" *ngIf="fooditemName.touched && fooditemName.invalid">
+                            Food Item Name is required!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-lg-6">
+                    <label>Food Item Description</label>
+                    <div class="col-xs-10">
+                        <input #fooditemDescription="ngModel" [(ngModel)]="outletFoodItem.description" name="description" id="outletFoodItemDescription"
+                            class="form-control" required>
+                        <div class="alert alert-danger" *ngIf="fooditemDescription.touched && fooditemDescription.invalid">
+                            Food Item Description is required!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-lg-6">
+                    <label for="imageUrl">Image URL</label>
+                    <input #imageUrl="ngModel" [(ngModel)]="outletFoodItem.ImageURL" name="ImageURL" id="imageUrl" type="text" class="form-control"
+                        required url>
+                    <div class="alert alert-danger" *ngIf="imageUrl.touched && imageUrl.invalid">
+                        <div *ngIf="imageUrl.errors.required">Image URL is required!</div>
+                        <div *ngIf="imageUrl.errors.url">URL is invalid!</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Food Item Type</label>
+                        <select #foodItemType="ngModel" [(ngModel)]="outletFoodItem.foodItemTypeID" name="foodItemTypeID" id="foodItemType" class="form-control"
+                            required>
+                            <option value="undefined">Select the Food Item Type...</option>
+                            <option *ngFor='let foodItemType of foodItemTypes' [value]="foodItemType.id">{{ foodItemType.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Food Item Size</label>
+                        <select #foodItemSize="ngModel" [(ngModel)]="outletFoodItem.foodItemSizeID" name="foodItemSizeID" id="foodItemSize" class="form-control"
+                            required>
+                            <option value="undefined">Select the Food Item Size...</option>
+                            <option *ngFor='let foodItemSize of foodItemSizes' [value]="foodItemSize.id">{{ foodItemSize.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-lg-6">
+                    <label for="price">Price</label>
+                    <div class="col-xs-10">
+                        <input #price="ngModel" [(ngModel)]="outletFoodItem.price" name="price" id="price" type="number" class="form-control" required>
+                        <div class="alert alert-danger" *ngIf="price.touched && price.invalid">
+                            Price is required!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <button [disabled]="!outletFoodItemForm.valid" type="submit" class="btn btn-outline-primary form-group col-md-3">Save</button>
+    </form>
+</div>

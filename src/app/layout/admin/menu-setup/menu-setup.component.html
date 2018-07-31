@@ -1,0 +1,87 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Outlet Menu Setup'" [icon]="'fa-edit'"></app-page-header>
+
+    <form role="form" #menuSetupForm="ngForm" (ngSubmit)="onSubmit(menuSetupForm)">
+        <div class="form-content">
+            <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Outlet</label>
+                        <select #outlet="ngModel" [(ngModel)]="outletMenuSetup.outletID" name="outletID" id="outletID" class="form-control" required>
+                            <option value="undefined">Select Outlet...</option>
+                            <option *ngFor='let outlet of outlets' [value]="outlet.id">{{ outlet.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Menu Title</label>
+                        <select #menuTitle="ngModel" [(ngModel)]="outletMenuSetup.outletMenuTitleID" name="outletMenuTitleID" id="outletMenuTitleID" class="form-control"
+                            required>
+                            <option value="undefined">Select the Menu...</option>
+                            <option *ngFor='let menuTitle of menuTitles' [value]="menuTitle.outletMenuTitleID">{{ menuTitle.menuTitle }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-lg-6">
+                    <label>Maximum Order Quantity</label>
+                    <div class="col-xs-10">
+                        <input #maxOrder="ngModel" [(ngModel)]="outletMenuSetup.maxOrderQty" name="maxOrderQty" id="maxOrderQty" type="number" class="form-control"
+                            required>
+                        <div class="alert alert-danger" *ngIf="maxOrder.touched && maxOrder.invalid">
+                            Maximum Order Quantity is required!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-lg-6">
+                    <label>Curry Count</label>
+                    <div class="col-xs-10">
+                        <input #curryCount="ngModel" [(ngModel)]="outletMenuSetup.maxCurryCount" name="maxCurryCount" id="maxCurryCount" type="number" class="form-control"
+                            required>
+                        <div class="alert alert-danger" *ngIf="curryCount.touched && curryCount.invalid">
+                            Curry Count is required!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-lg-6">
+                    <label>Maximum Extras Quantity</label>
+                    <div class="col-xs-10">
+                        <input #maxExtra="ngModel" [(ngModel)]="outletMenuSetup.maxExtrasQty" name="maxExtrasQty" id="maxExtrasQty" type="number" class="form-control"
+                            required>
+                        <div class="alert alert-danger" *ngIf="maxExtra.touched && maxExtra.invalid">
+                            Maximum Extras Quantity is required!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-lg-6">
+                    <label>Maximum Free Item Quantity</label>
+                    <div class="col-xs-10">
+                        <input #maxFreeItem="ngModel" [(ngModel)]="outletMenuSetup.maxFreeItemQty" name="maxFreeItemQty" id="maxFreeItemQty" type="number" class="form-control"
+                            required>
+                        <div class="alert alert-danger" *ngIf="maxFreeItem.touched && maxFreeItem.invalid">
+                            Maximum Free Item Quantity is required!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <button [disabled]="!menuSetupForm.valid" type="submit" class="btn btn-outline-primary form-group col-md-3">Save</button>
+    </form>
+</div>

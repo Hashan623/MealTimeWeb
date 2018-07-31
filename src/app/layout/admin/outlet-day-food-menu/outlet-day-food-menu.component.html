@@ -1,0 +1,74 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Outlet Day Food Menu'" [icon]="'fa-edit'"></app-page-header>
+
+    <form role="form" #outletDayFoodMenuForm="ngForm" (ngSubmit)="onSubmit(outletDayFoodMenuForm)">
+        <div class="form-content">
+
+            <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Outlet</label>
+                        <select #outlet="ngModel" [(ngModel)]="dayFoodMenuItem.outletID" name="outletID" id="outlet" class="form-control" required>
+                            <option value="undefined">Select Outlet...</option>
+                            <option *ngFor='let outlet of outlets' [value]="outlet.id">{{ outlet.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Day</label>
+                        <select #day="ngModel" [(ngModel)]="dayFoodMenuItem.dayID" name="day" id="day" class="form-control" required>
+                            <option value="undefined">Select the Day...</option>
+                            <option value="1">Wednesday</option>
+                            <option *ngFor='let day of days' [value]="day.id">{{ day.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Menu Category</label>
+                        <select #menuCategory="ngModel" [(ngModel)]="dayFoodMenuItem.menuCategoryID" name="menuCategoryID" id="time" class="form-control" required>
+                            <option value="undefined">Select the Menu Category...</option>
+                            <option *ngFor='let menuCategory of menuCategories' [value]="menuCategory.id">{{ menuCategory.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Menu</label>
+                        <select #menuTitle="ngModel" [(ngModel)]="dayFoodMenuItem.menuTitleID" name="menuTitleID" id="menuTitleID" class="form-control" required>
+                            <option value="undefined">Select the Menu...</option>
+                            <option *ngFor='let menuTitle of menuTitles' [value]="menuTitle.id">{{ menuTitle.menuTitle }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-lg-6">
+                    <label>Description</label>
+                    <div class="col-xs-10">
+                        <input #description="ngModel" [(ngModel)]="dayFoodMenuItem.description" name="description" id="description"
+                            class="form-control" required>
+                        <div class="alert alert-danger" *ngIf="description.touched && description.invalid">
+                            Description is required!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+        </div>
+        <button [disabled]="!outletDayFoodMenuForm.valid" type="submit" class="btn btn-outline-primary form-group col-md-3">Save</button>
+    </form>
+</div>

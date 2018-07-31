@@ -1,0 +1,42 @@
+<div class="login-page" [@routerTransition]>
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <img class="user-avatar" src="assets/images/logo.png" width="150px" />
+            <h1>MealTime</h1>
+            <form role="form" #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
+                <div class="form-content">
+                        <input type="text" name="UserLoginTypeID" #UserLoginTypeID="ngModel" [(ngModel)]="user.UserLoginTypeID" id="UserLoginTypeID" value="10">
+                            <input type="text" name="UserTypeID" #UserTypeID="ngModel" [(ngModel)]="user.UserTypeID" id="UserTypeID" value="20">
+                    <div class="form-group">
+                        <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" class="form-control input-underline input-lg" id="name" placeholder="Outlet Name" required>
+                        <div class="validation-error" *ngIf="name.invalid && name.touched">This Field is Required.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control input-underline input-lg" id="email" placeholder="Email" required>
+                        <div class="validation-error" *ngIf="email.invalid && email.touched">This Field is Required.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" name="MobileNo" #MobileNo="ngModel" [(ngModel)]="user.MobileNo" class="form-control input-underline input-lg" id="MobileNo" placeholder="Mobile Number" required>
+                        <div class="validation-error" *ngIf="MobileNo.invalid && MobileNo.touched">This Field is Required.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" name="username" #username="ngModel" [(ngModel)]="user.username" class="form-control input-underline input-lg" id="username" placeholder="Username" required>
+                        <div class="validation-error" *ngIf="username.invalid && username.touched">This Field is Required.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="form-control input-underline input-lg" id="password" placeholder="Password" required>
+                        <div class="validation-error" *ngIf="password.invalid && password.touched">This Field is Required.</div>
+                    </div>
+                </div>
+                <!-- <button type="button" class="btn rounded-btn" [disabled]="!registrationForm.valid" > Register </button>&nbsp; -->
+                <button [disabled]="!registrationForm.valid" type="submit" class="btn rounded-btn">Register</button>
+                &nbsp;
+                <a class="btn rounded-btn" [routerLink]="['/login']"> Log in </a>
+            </form>
+        </div>
+    </div>
+</div>
